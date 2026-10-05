@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research First"
+  short_description: "复杂问题先搜现成方案，简单问题直接做"
+  default_prompt: "用 $research-first 处理这个复杂问题：先查官方文档和 GitHub 上的现成做法，再动手。"
