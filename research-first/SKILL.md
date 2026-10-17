@@ -16,6 +16,7 @@ metadata:
 - 报错/堆栈看不懂，或看起来自相矛盾
 - 要用的库、API、配置项、构建工具，不确定**当前版本**的正确写法（版本敏感的东西尤其容易记错）
 - 「有没有现成方案」类问题：选库、选工具、找官方示例、找可复用的实现
+- 从零做新功能、新界面或新架构，要定交互和取舍 —— 动手前先找 2–3 个同类产品或开源实现，看它们怎么做、明确不做什么
 - 已经按自己的判断试过一次，还是不对
 - 出错代价高：鉴权、加密、数据迁移、并发、删改数据、CI/发布流程
 - 要解释别人代码为什么这么写、或某个行为的成因
@@ -38,6 +39,7 @@ metadata:
 | 别人怎么实现某个功能 | GitHub 代码搜索 | `gh search code "<符号名>" --repo <owner>/<repo> --limit 10 --json path,url` |
 | 官方用法 / API / 配置项 | 官方文档正文 | `curl -s https://r.jina.ai/<文档URL>` |
 | 选型、方案对比、最佳实践 | Exa 网页搜索 | `mcporter call exa.web_search_exa query="<问题>" numResults=5` |
+| 同类产品、交互设计参考 | 仓库主页 + README 的 Features / 用户手册 | `gh search repos "<关键词>" --limit 10 --json fullName,description,stargazersCount` |
 | 版本变更、兼容性、破坏性改动 | Release / Changelog | `gh api repos/<owner>/<repo>/releases --jq '.[0:5][].tag_name'` |
 | 中文社区场景、国内工具问题 | agent-reach | 读 `~/.agents/skills/agent-reach/SKILL.md` 与对应 `references/*.md` |
 
@@ -51,6 +53,7 @@ metadata:
 - **靠 `--repo` 限定范围，不要把库名和版本写进 query**：`gh search issues "field_validator" --repo pydantic/pydantic` 比把 `pydantic v2` 塞进搜索词精确得多 —— 在库自己的仓库里，issue 标题通常不会出现库名。
 - **空结果不等于没有先例**：`gh search` 查不到东西时输出为空、退出码仍是 `0`，不会报错。别把空结果读成「没人做过」，先减词、加引号、换成更独特的符号名再试一轮。
 - **来源分级**：官方文档 → 源码 / CHANGELOG → maintainer 确认过的 issue 回复 → 高赞社区答案 → 博客。低可信来源只当线索，不当结论。
+- **设计阶段先看成品**：找同类工具时先读 README 的 Features 和用户手册，别只看 star。记三条：它替用户省掉了哪一步、状态信息放在界面哪里、它明确声明不做什么。抄交互和取舍，不抄范围。
 - **跟当前环境对齐**：查到写法后先看本地版本（`python -V`、`node -v`、`pip show <pkg>`、`cat package.json`）。别把最新版写法套到旧版本上。
 - **换词不重喂**：同一 query 反复搜没有意义；换关键词、换语言、换平台（英文社区 → 中文社区，或反过来）。
 - **输出要压缩**：`--json` + `--jq` 只取标题和链接；不要把整页 HTML、整篇文档灌进上下文。
